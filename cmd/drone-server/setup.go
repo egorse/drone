@@ -27,6 +27,7 @@ import (
 	"github.com/drone/drone/remote/bitbucket"
 	"github.com/drone/drone/remote/bitbucketserver"
 	"github.com/drone/drone/remote/coding"
+	"github.com/drone/drone/remote/gerrit"
 	"github.com/drone/drone/remote/gitea"
 	"github.com/drone/drone/remote/github"
 	"github.com/drone/drone/remote/gitlab"
@@ -87,6 +88,8 @@ func SetupRemote(c *cli.Context) (remote.Remote, error) {
 		return setupGitea(c)
 	case c.Bool("coding"):
 		return setupCoding(c)
+	case c.Bool("gerrit"):
+		return setupGerrit(c)
 	default:
 		return nil, fmt.Errorf("version control system not configured")
 	}
@@ -187,6 +190,17 @@ func setupCoding(c *cli.Context) (remote.Remote, error) {
 		Username:   c.String("coding-git-username"),
 		Password:   c.String("coding-git-password"),
 		SkipVerify: c.Bool("coding-skip-verify"),
+	})
+}
+
+// helper function to setup the Coding remote from the CLI arguments.
+func setupGerrit(c *cli.Context) (remote.Remote, error) {
+	return gerrit.New(gerrit.Opts{
+		URL:         c.String("gerrit-server"),
+		Username:    c.String("gerrit-git-username"),
+		Password:    c.String("gerrit-git-password"),
+		PrivateMode: c.Bool("gerrit-private-mode"),
+		SkipVerify:  c.Bool("gerrit-skip-verify"),
 	})
 }
 

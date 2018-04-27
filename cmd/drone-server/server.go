@@ -495,6 +495,36 @@ var flags = []cli.Flag{
 		Name:   "coding-skip-verify",
 		Usage:  "coding skip ssl verification",
 	},
+	cli.BoolFlag{
+		EnvVar: "DRONE_GERRIT",
+		Name:   "gerrit",
+		Usage:  "gerrit driver is enabled",
+	},
+	cli.StringFlag{
+		EnvVar: "DRONE_GERRIT_URL",
+		Name:   "gerrit-server",
+		Usage:  "gerrit server address",
+	},
+	cli.StringFlag{
+		EnvVar: "DRONE_GERRIT_GIT_USERNAME",
+		Name:   "gerrit-git-username",
+		Usage:  "gerrit service account username",
+	},
+	cli.StringFlag{
+		EnvVar: "DRONE_GERRIT_GIT_PASSWORD",
+		Name:   "gerrit-git-password",
+		Usage:  "gerrit service account password",
+	},
+	cli.BoolFlag{
+		EnvVar: "DRONE_GERRIT_PRIVATE_MODE",
+		Name:   "gerrit-private-mode",
+		Usage:  "gerrit is running in private mode",
+	},
+	cli.BoolFlag{
+		EnvVar: "DRONE_GERRIT_SKIP_VERIFY",
+		Name:   "gerrit-skip-verify",
+		Usage:  "gerrit skip ssl verification",
+	},
 	cli.DurationFlag{
 		EnvVar: "DRONE_KEEPALIVE_MIN_TIME",
 		Name:   "keepalive-min-time",

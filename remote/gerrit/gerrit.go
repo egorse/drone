@@ -20,6 +20,7 @@ import (
 	"net/http"
 	"net/url"
 
+	"github.com/Sirupsen/logrus"
 	"github.com/drone/drone/model"
 	"github.com/drone/drone/remote"
 )
@@ -48,6 +49,7 @@ type client struct {
 // New returns a Remote implementation that integrates with Getter, an open
 // source Git hosting service and code review system.
 func New(opts Opts) (remote.Remote, error) {
+	logrus.Error("gerrit.New()")
 	url, err := url.Parse(opts.URL)
 	if err != nil {
 		return nil, err
@@ -69,66 +71,84 @@ func New(opts Opts) (remote.Remote, error) {
 // Login authenticates an account with Gerrit using oauth authentication. The
 // Gerrit account details are returned when the user is successfully authenticated.
 func (c *client) Login(res http.ResponseWriter, req *http.Request) (*model.User, error) {
-	return nil, nil
+	logrus.Error("gerrit.Login()")
+	return &model.User{
+		Login: "admin",
+		//Token:  "fake-token",
+		Email:  "do-not-reply@domain.com",
+		Avatar: "http://www.icare3d.org/images/AvatarTransp.png",
+	}, nil
 }
 
 // Auth is not supported by the Gerrit driver.
 func (c *client) Auth(token, secret string) (string, error) {
+	logrus.Error("gerrit.Auth()")
 	return "", fmt.Errorf("Not Implemented")
 }
 
 // Teams is not supported by the Gerrit driver.
 func (c *client) Teams(u *model.User) ([]*model.Team, error) {
+	logrus.Error("gerrit.Teams()")
 	var empty []*model.Team
 	return empty, nil
 }
 
 // Repo is not supported by the Gerrit driver.
 func (c *client) Repo(u *model.User, owner, name string) (*model.Repo, error) {
+	logrus.Error("gerrit.Repo()")
 	return nil, nil
 }
 
 // Repos is not supported by the Gerrit driver.
 func (c *client) Repos(u *model.User) ([]*model.Repo, error) {
+	logrus.Error("gerrit.Repos()")
 	return nil, nil
 }
 
 // Perm is not supported by the Gerrit driver.
 func (c *client) Perm(u *model.User, owner, name string) (*model.Perm, error) {
+	logrus.Error("gerrit.Perm()")
 	return nil, nil
 }
 
 // File is not supported by the Gerrit driver.
 func (c *client) File(u *model.User, r *model.Repo, b *model.Build, f string) ([]byte, error) {
+	logrus.Error("gerrit.File()")
 	return nil, nil
 }
 
 // File is not supported by the Gerrit driver.
 func (c *client) FileRef(u *model.User, r *model.Repo, ref, f string) ([]byte, error) {
+	logrus.Error("gerrit.FileRef()")
 	return nil, nil
 }
 
 // Status is not supported by the Gogs driver.
 func (c *client) Status(u *model.User, r *model.Repo, b *model.Build, link string) error {
+	logrus.Error("gerrit.Status()")
 	return nil
 }
 
 // Netrc is not supported by the Gerrit driver.
 func (c *client) Netrc(u *model.User, r *model.Repo) (*model.Netrc, error) {
+	logrus.Error("gerrit.Netrc()")
 	return nil, nil
 }
 
 // Activate is not supported by the Gerrit driver.
 func (c *client) Activate(u *model.User, r *model.Repo, link string) error {
+	logrus.Error("gerrit.Activate()")
 	return nil
 }
 
 // Deactivate is not supported by the Gogs driver.
 func (c *client) Deactivate(u *model.User, r *model.Repo, link string) error {
+	logrus.Error("gerrit.Deactivate()")
 	return nil
 }
 
 // Hook is not supported by the Gerrit driver.
 func (c *client) Hook(r *http.Request) (*model.Repo, *model.Build, error) {
+	logrus.Error("gerrit.Hook()")
 	return nil, nil, nil
 }
